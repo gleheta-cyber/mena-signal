@@ -203,6 +203,29 @@ def parse_date(s):
     return d.astimezone(timezone.utc)
 
 
+def shrink_image(url):
+    """Ask image resizers (Arc XP, WordPress) for ~1200px wide images instead of originals."""
+    if not url:
+        return url
+    p = urllib.parse.urlparse(url)
+    q = dict(urllib.parse.parse_qsl(p.query, keep_blank_values=True))
+    try:
+        w = int(q.get("width") or q.get("w") or 0)
+    except ValueError:
+        return url
+    if w > 1400:
+        key = "width" if "width" in q else "w"
+        hkey = "height" if "height" in q else ("h" if "h" in q else None)
+        if hkey:
+            try:
+                q[hkey] = str(round(int(q[hkey]) * 1200 / w))
+            except ValueError:
+                q.pop(hkey)
+        q[key] = "1200"
+        return urllib.parse.urlunparse(p._replace(query=urllib.parse.urlencode(q)))
+    return url
+
+
 IMG_IN_HTML = re.compile(r"<img[^>]+src=[\"']([^\"']+)[\"']", re.I)
 
 
@@ -441,7 +464,7 @@ def main():
             title=it["title"], link=it["link"], source=it["source"],
             domain=urllib.parse.urlparse(it["link"]).netloc.replace("www.", ""),
             cat=it["cat"], countries=it["countries"], date=it["date"].isoformat(),
-            summary=it["summary"], img=it["img"], also=it["also"], score=score(it)))
+            summary=it["summary"], img=shrink_image(it["img"]), also=it["also"], score=score(it)))
     out.sort(key=lambda i: i["score"], reverse=True)
 
     sources = {n for n, c, e in report if c and not e}
