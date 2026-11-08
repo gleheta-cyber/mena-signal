@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__SITE__</title>
+<meta name="description" content="Middle East geopolitics, defence and naval news, linked to the original source.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --fg:#111214; --muted:#6b6e75; --line:#e7e7ea; --soft:#f4f4f6;
+  --accent:#1f3a5f; --ph:#eef1f5; --ph-fg:#8a97a8;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1114; --fg:#ececee; --muted:#9a9ea6; --line:#24272d; --soft:#171a1f;
+    --accent:#93b4dc; --ph:#1a1e25; --ph-fg:#5f6b7c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1114; --fg:#ececee; --muted:#9a9ea6; --line:#24272d; --soft:#171a1f;
+  --accent:#93b4dc; --ph:#1a1e25; --ph-fg:#5f6b7c;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* header */
+.topline{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);
+  padding:14px 0 0;letter-spacing:.02em}
+.mast{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:18px 0 18px;
+  border-bottom:1px solid var(--fg)}
+.brand h1{font:600 34px/1 var(--serif);margin:0;letter-spacing:-.01em}
+.brand p{margin:8px 0 0;color:var(--muted);font-size:13px}
+.theme{background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;
+  width:34px;height:34px;cursor:pointer;font-size:15px;flex:none}
+.theme:hover{color:var(--fg);border-color:var(--muted)}
+
+/* toolbar */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:16px;min-height:52px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:0;padding:14px 10px;font:500 13px var(--sans);color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;white-space:nowrap;margin-bottom:-1px}
+.tab:hover{color:var(--fg)}
+.tab[aria-pressed="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.tools{display:flex;gap:8px;align-items:center}
+.tools select,.tools input{font:13px var(--sans);color:var(--fg);background:var(--bg);border:1px solid var(--line);
+  border-radius:6px;padding:7px 10px;height:34px}
+.tools input{width:180px}
+.tools select:focus,.tools input:focus{outline:none;border-color:var(--accent)}
+
+/* sections */
+main{padding:28px 0 64px}
+.sec{margin-top:48px}
+.sec:first-child{margin-top:0}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  border-top:1px solid var(--line);padding-top:12px;margin-bottom:20px}
+.sec-h h2{margin:0;font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.sec-h button{background:none;border:0;color:var(--muted);font:12px var(--sans);cursor:pointer;padding:0}
+.sec-h button:hover{color:var(--accent)}
+
+/* media */
+.media{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ph)}
+.media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.media .ph{display:none}
+.media.noimg .ph{display:flex;position:absolute;inset:0;align-items:center;justify-content:center;
+  font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ph-fg);
+  background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(127,127,127,.06) 10px 11px)}
+
+/* lead */
+.lead{display:grid;grid-template-columns:3fr 2fr;gap:32px;align-items:center}
+.lead h3{font:600 34px/1.15 var(--serif);margin:10px 0 14px;letter-spacing:-.01em}
+.lead p{color:var(--muted);margin:0 0 16px;font-size:16px}
+a.card:hover h3,a.lead:hover h3,a.row:hover h3{color:var(--accent)}
+a.card:hover img,a.lead:hover img{transform:scale(1.025)}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 28px}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}
+.card{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card h3{font:600 19px/1.28 var(--serif);margin:0;transition:color .15s}
+.grid.four .card h3{font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tag{font:600 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.meta{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.meta img{width:14px;height:14px;border-radius:3px}
+.meta .dot{opacity:.5}
+.also{color:var(--muted)}
+
+/* analysis list */
+.rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.row{display:block;padding:16px 0;border-bottom:1px solid var(--line)}
+.row h3{font:600 17px/1.3 var(--serif);margin:4px 0 6px;transition:color .15s}
+
+.empty{color:var(--muted);padding:60px 0;text-align:center}
+.count{color:var(--muted);font-size:13px;margin:0 0 24px}
+
+footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:13px}
+footer h4{margin:0 0 12px;font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
+.srcs{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:22px}
+.srcs a:hover{color:var(--accent)}
+
+@media (max-width:980px){
+  .grid,.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lead{grid-template-columns:1fr;gap:18px}
+  .lead h3{font-size:28px}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .brand h1{font-size:27px}
+  .grid,.grid.four,.rows{grid-template-columns:1fr}
+  .lead h3{font-size:24px}
+  .tools{width:100%;padding-bottom:10px}
+  .tools select{flex:0 0 auto}
+  .tools input{flex:1;width:auto;min-width:0}
+  .topline span:last-child{text-align:right}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topline"><span id="today"></span><span id="updated"></span></div>
+  <header class="mast">
+    <div class="brand">
+      <h1>__SITE__</h1>
+      <p>Middle East geopolitics, defence &amp; naval news. Every story links to its original source.</p>
+    </div>
+    <button class="theme" id="theme" title="Toggle dark mode" aria-label="Toggle dark mode">◐</button>
+  </header>
+</div>
+
+<nav class="bar">
+  <div class="wrap">
+    <div class="tabs" id="tabs" role="toolbar" aria-label="Categories"></div>
+    <div class="tools">
+      <select id="country" aria-label="Filter by country"><option value="">All countries</option></select>
+      <input id="q" type="search" placeholder="Search headlines" aria-label="Search headlines">
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="main"></main>
+
+<footer class="wrap">
+  <h4>Sources</h4>
+  <div class="srcs" id="srcs"></div>
+  <div>__SITE__ is an index. All stories, images and summaries belong to and link to their original publishers.</div>
+</footer>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function(){
+  var DATA = JSON.parse(document.getElementById('data').textContent);
+  var ITEMS = DATA.items;
+  var CATS = {geopolitics:'Geopolitics', defence:'Defence', naval:'Naval', security:'Security', analysis:'Analysis'};
+  var SECTION_TITLES = {geopolitics:'Geopolitics', defence:'Middle East Defence', naval:'Naval & Maritime',
+                        security:'Conflict & Security', analysis:'Analysis & Think Tanks'};
+  var state = {cat:'all', country:'', q:''};
+
+  // ---- theme
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('theme').onclick = function(){
+    var dark = root.getAttribute('data-theme') ? root.getAttribute('data-theme') === 'dark'
+             : matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  };
+
+  // ---- dates
+  var upd = new Date(DATA.updated);
+  document.getElementById('today').textContent = new Date().toLocaleDateString('en-GB',
+    {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  document.getElementById('updated').textContent = 'Last updated ' +
+    upd.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
+
+  function ago(iso){
+    var m = (Date.now() - new Date(iso)) / 60000;
+    if (m < 60) return Math.max(1, Math.round(m)) + 'm ago';
+    var h = m / 60; if (h < 24) return Math.round(h) + 'h ago';
+    var d = Math.round(h / 24); return d === 1 ? 'Yesterday' : d + 'd ago';
+  }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fav(d){ return 'https://www.google.com/s2/favicons?sz=32&domain=' + encodeURIComponent(d); }
+
+  function media(it){
+    var ph = '<span class="ph">' + CATS[it.cat] + '</span>';
+    if (!it.img) return '<div class="media noimg">' + ph + '</div>';
+    return '<div class="media"><img src="' + esc(it.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" ' +
+      'onerror="this.parentNode.classList.add(\'noimg\');this.remove()">' + ph + '</div>';
+  }
+  function meta(it){
+    var also = it.also && it.also.length ? '<span class="dot">·</span><span class="also" title="Also covered by ' +
+      esc(it.also.map(function(a){return a.source;}).join(', ')) + '">+' + it.also.length +
+      (it.also.length === 1 ? ' source' : ' sources') + '</span>' : '';
+    return '<div class="meta"><img src="' + fav(it.domain) + '" alt="" loading="lazy">' +
+      '<span>' + esc(it.source) + '</span><span class="dot">·</span><span>' + ago(it.date) + '</span>' + also + '</div>';
+  }
+  function href(it){ return 'href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer"'; }
+  function card(it, withSummary){
+    return '<a class="card" ' + href(it) + '>' + media(it) +
+      '<div class="tag">' + CATS[it.cat] + '</div><h3>' + esc(it.title) + '</h3>' +
+      (withSummary && it.summary ? '<p>' + esc(it.summary) + '</p>' : '') + meta(it) + '</a>';
+  }
+  function lead(it){
+    return '<a class="lead" ' + href(it) + '>' + media(it) + '<div><div class="tag">Top story · ' + CATS[it.cat] +
+      '</div><h3>' + esc(it.title) + '</h3>' + (it.summary ? '<p>' + esc(it.summary) + '</p>' : '') + meta(it) + '</div></a>';
+  }
+  function row(it){
+    return '<a class="row" ' + href(it) + '>' + '<div class="meta"><img src="' + fav(it.domain) + '" alt="" loading="lazy">' +
+      '<span>' + esc(it.source) + '</span><span class="dot">·</span><span>' + ago(it.date) + '</span></div>' +
+      '<h3>' + esc(it.title) + '</h3></a>';
+  }
+  function section(key, title, body){
+    return '<section class="sec"><div class="sec-h"><h2>' + title + '</h2>' +
+      (key ? '<button data-cat="' + key + '">See all →</button>' : '') + '</div>' + body + '</section>';
+  }
+
+  // ---- filters
+  var tabs = document.getElementById('tabs');
+  [['all','Top Stories']].concat(Object.keys(CATS).map(function(k){return [k, CATS[k]];})).forEach(function(c){
+    var b = document.createElement('button'); b.className = 'tab'; b.textContent = c[1]; b.dataset.cat = c[0];
+    tabs.appendChild(b);
+  });
+  var countries = {};
+  ITEMS.forEach(function(i){ i.countries.forEach(function(c){ countries[c] = (countries[c]||0) + 1; }); });
+  var sel = document.getElementById('country');
+  Object.keys(countries).sort().forEach(function(c){
+    var o = document.createElement('option'); o.value = c; o.textContent = c + ' (' + countries[c] + ')'; sel.appendChild(o);
+  });
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-cat]'); if (!b) return;
+    state.cat = b.dataset.cat; render(); window.scrollTo({top:0, behavior:'smooth'});
+  });
+  sel.onchange = function(){ state.country = sel.value; render(); };
+  document.getElementById('q').oninput = function(e){ state.q = e.target.value.trim().toLowerCase(); render(); };
+
+  document.getElementById('srcs').innerHTML = DATA.sources.map(function(s){
+    return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">' + esc(s.name) + '</a>';
+  }).join('');
+
+  // ---- render
+  function pick(list, n, used, perSource){
+    var out = [], bySrc = {};
+    for (var i = 0; i < list.length && out.length < n; i++){
+      var it = list[i]; if (used.has(it)) continue;
+      if (perSource && (bySrc[it.source]||0) >= perSource) continue;
+      bySrc[it.source] = (bySrc[it.source]||0) + 1; out.push(it); used.add(it);
+    }
+    return out;
+  }
+
+  function render(){
+    Array.prototype.forEach.call(tabs.children, function(b){ b.setAttribute('aria-pressed', b.dataset.cat === state.cat); });
+    var main = document.getElementById('main');
+    var list = ITEMS.filter(function(i){
+      return (state.cat === 'all' || i.cat === state.cat) &&
+        (!state.country || i.countries.indexOf(state.country) >= 0) &&
+        (!state.q || (i.title + ' ' + i.summary + ' ' + i.source).toLowerCase().indexOf(state.q) >= 0);
+    });
+
+    if (state.cat === 'all' && !state.q && !state.country){
+      var used = new Set(), news = list.filter(function(i){ return i.cat !== 'analysis'; });
+      var top = news.filter(function(i){ return i.img; })[0] || news[0];
+      var html = '';
+      if (top){ used.add(top); html += '<section class="sec">' + lead(top) + '</section>'; }
+      var heads = pick(news, 9, used, 2);
+      if (heads.length) html += section(null, "Today's Headlines", '<div class="grid">' + heads.map(function(i){return card(i, true);}).join('') + '</div>');
+      ['geopolitics','defence','naval','security'].forEach(function(k){
+        var s = pick(news.filter(function(i){return i.cat === k;}), 4, used, 2);
+        if (s.length) html += section(k, SECTION_TITLES[k], '<div class="grid four">' + s.map(function(i){return card(i, false);}).join('') + '</div>');
+      });
+      var an = list.filter(function(i){ return i.cat === 'analysis'; })
+        .sort(function(a,b){ return new Date(b.date) - new Date(a.date); }).slice(0, 8);
+      if (an.length) html += section('analysis', SECTION_TITLES.analysis, '<div class="rows">' + an.map(row).join('') + '</div>');
+      main.innerHTML = html || '<div class="empty">No stories yet. Run build.py to fetch the latest news.</div>';
+      return;
+    }
+
+    list = list.slice().sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+    var label = (state.cat === 'all' ? 'All stories' : SECTION_TITLES[state.cat]) + (state.country ? ' · ' + state.country : '');
+    var body = state.cat === 'analysis'
+      ? '<div class="rows">' + list.map(row).join('') + '</div>'
+      : '<div class="grid">' + list.map(function(i){return card(i, true);}).join('') + '</div>';
+    main.innerHTML = '<section class="sec"><div class="sec-h"><h2>' + esc(label) + '</h2></div>' +
+      '<p class="count">' + list.length + (list.length === 1 ? ' story' : ' stories') + ', newest first</p>' +
+      (list.length ? body : '<div class="empty">Nothing matches these filters.</div>') + '</section>';
+  }
+  render();
+})();
+</script>
+</body>
+</html>
